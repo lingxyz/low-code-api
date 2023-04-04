@@ -1,0 +1,22 @@
+{
+    "params": [{
+        "name": "name",
+        "required": "true",
+        "message": "name不能为空"
+    }],
+
+    "steps": [{
+        "type": "SQL",
+        "content": "select * from table"
+    }, {
+        "type": "function",
+        "content": "function aaa(a) {console.log(a)}"
+    }, {
+        "type": "script",
+        "content": "console.log(111)"
+    }],
+
+    "response": [{
+    
+    }]
+}
