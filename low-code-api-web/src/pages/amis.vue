@@ -10,14 +10,14 @@ const amisjson = {
   mode: 'horizontal',
   body: [
     {
-      label: 'Name',
+      label: '用户名',
       type: 'input-text',
       name: 'name'
     },
     {
-      label: 'Email',
-      type: 'input-email',
-      name: 'email'
+      label: '密码',
+      type: 'input-text',
+      name: 'password'
     }
   ]
 }
