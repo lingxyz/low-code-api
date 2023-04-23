@@ -1,22 +1,22 @@
 <template>
-    <div id="box">
-        <slot></slot>
-    </div>
+<div id="box">
+  <slot></slot>
+</div>
 </template>
 
 <script lang="ts" setup>
 import {  onMounted } from "vue";
 
 const props= defineProps({
-    amisjson: {
-        type: Object,
-        required: true
-    }
+  amisjson: {
+    type: Object,
+    required: true
+  }
 })
 
 onMounted(() => {
-    // @ts-ignore
-    var amis = amisRequire('amis/embed');
-    let amisScoped = amis.embed('#box', props.amisjson);
+  // @ts-ignore
+  var amis = amisRequire('amis/embed');
+  let amisScoped = amis.embed('#box', props.amisjson);
 })
 </script>

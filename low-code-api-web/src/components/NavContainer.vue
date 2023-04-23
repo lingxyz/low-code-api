@@ -2,9 +2,9 @@
   <div class="site">
     <div class="nav">
         <h3>接口低代码系统</h3>
-        <Amis :amisjson="amisjson"></Amis>
+        <!-- <Amis :amisjson="amisjson"></Amis> -->
     </div>
-    
+
     <div class="container">
         <slot></slot>
     </div>
@@ -28,8 +28,6 @@ const amisjson = {
             {
               "label": "数据源",
               "to": "?jsonfile=source",
-              "target": "",
-              "unfolded": false,
               "active": false,
               "children": [
               ]
@@ -37,8 +35,6 @@ const amisjson = {
             {
               "label": "数据表",
               "to": "?jsonfile=tables",
-              "target": "",
-              "unfolded": false,
               "active": false,
               "children": [
               ]
@@ -53,24 +49,18 @@ const amisjson = {
             {
               "label": "登录模块",
               "to": "",
-              "target": "",
-              "unfolded": false,
               "active": false,
               "children": [
                 {
                   "label": "注册",
-                  "to": "?jsonfile=register",
-                  "target": "",
-                  "unfolded": false,
+                  "to": "/apiConfig?path=register",
                   "active": false,
                   "children": [
                   ]
                 },
                 {
                   "label": "登录",
-                  "to": "?jsonfile=login",
-                  "target": "",
-                  "unfolded": false,
+                  "to": "/apiConfig?path=login",
                   "active": false,
                   "children": [
                   ]

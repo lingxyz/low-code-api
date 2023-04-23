@@ -9,11 +9,12 @@
 
 <script setup>
 import Amis from "../components/Amis.vue";
-  
+
 const amisjson = {
   type: 'form',
   mode: 'horizontal',
-  api: "/amis/api/mock2/form/saveForm",
+  api: "/mock/success.json",
+  redirect: "/",
   body: [
     {
       label: '用户名',
