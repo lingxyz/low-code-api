@@ -27,77 +27,49 @@ export default {
         },
       },
     });
-
-    const data = {
-      // 节点
-      nodes: [
-        {
-          id: "node1", // String，可选，节点的唯一标识
-          x: 80, // Number，必选，节点位置的 x 值
-          y: 40, // Number，必选，节点位置的 y 值
-          width: 80, // Number，可选，节点大小的 width 值
-          height: 40, // Number，可选，节点大小的 height 值
-          label: "hello", // String，节点标签
-        },
-        {
-          id: "node2-1", // String，节点的唯一标识
-          x: 160, // Number，必选，节点位置的 x 值
-          y: 180, // Number，必选，节点位置的 y 值
-          width: 80, // Number，可选，节点大小的 width 值
-          height: 40, // Number，可选，节点大小的 height 值
-          label: "world", // String，节点标签
-        },
-        {
-          id: "node2-2", // String，节点的唯一标识
-          x: 10, // Number，必选，节点位置的 x 值
-          y: 180, // Number，必选，节点位置的 y 值
-          width: 80, // Number，可选，节点大小的 width 值
-          height: 40, // Number，可选，节点大小的 height 值
-          label: "world", // String，节点标签
-        },
-        {
-          id: "node3-1", // String，节点的唯一标识
-          x: 10, // Number，必选，节点位置的 x 值
-          y: 300, // Number，必选，节点位置的 y 值
-          width: 80, // Number，可选，节点大小的 width 值
-          height: 40, // Number，可选，节点大小的 height 值
-          label: "world", // String，节点标签
-        },{
-          id: "node3-2", // String，节点的唯一标识
-          x: 120, // Number，必选，节点位置的 x 值
-          y: 300, // Number，必选，节点位置的 y 值
-          width: 80, // Number，可选，节点大小的 width 值
-          height: 40, // Number，可选，节点大小的 height 值
-          label: "world", // String，节点标签
-        },{
-          id: "node3-3", // String，节点的唯一标识
-          x: 300, // Number，必选，节点位置的 x 值
-          y: 300, // Number，必选，节点位置的 y 值
-          width: 80, // Number，可选，节点大小的 width 值
-          height: 40, // Number，可选，节点大小的 height 值
-          label: "world", // String，节点标签
-        },
-      ],
-      // 边
-      edges: [
-        {
-          source: "node1", // String，必须，起始节点 id
-          target: "node2-1", // String，必须，目标节点 id
-        },{
-          source: "node1", // String，必须，起始节点 id
-          target: "node2-2", // String，必须，目标节点 id
-        },{
-          source: "node2-1", // String，必须，起始节点 id
-          target: "node3-1", // String，必须，目标节点 id
-        },{
-          source: "node2-1", // String，必须，起始节点 id
-          target: "node3-2", // String，必须，目标节点 id
-        },{
-          source: "node2-1", // String，必须，起始节点 id
-          target: "node3-3", // String，必须，目标节点 id
-        },
-      ],
-    };
+    // 增加节点（节点位置x、y坐标动态计算）
+    for (let i = 1; i <= 6; i++) {
+      for (let k = 1; k <= i; k++) {
+        graph.addNode({
+          id: `${i}-${k}`,
+          label: `Node ${i}-${k}`,
+          width: 80,
+          height: 40,
+          x: 100 * (k - i/2),
+          y: 100 * (i-1),
+        })
+      }
+    }
+    // 增加连线
+    const edges = [
+      ['1-1', '2-1'],
+      ['1-1', '2-2'],
+      ['2-1', '3-1'],
+      ['2-1', '3-2'],
+      ['2-2', '3-3'],
+      ['3-1', '4-1'],
+      ['3-2', '4-2'],
+      ['3-3', '4-3'],
+      ['3-3', '4-4'],
+      ['4-1', '5-1'],
+      ['4-1', '5-2'],
+      ['4-2', '5-3'],
+      ['4-3', '5-4'],
+      ['4-4', '5-5'],
+      ['5-1', '6-1'],
+      ['5-2', '6-2'],
+      ['5-3', '6-3'],
+      ['5-3', '6-4'],
+      ['5-4', '6-5'],
+      ['5-5', '6-6'],
+    ];
+    edges.forEach(([source, target]) =>
+      graph.addEdge({
+        source: source,
+        target: target,
+      })
+    );
+    graph.centerContent();
 
     // 点击某个节点，显示/隐藏其所有子元素
     graph.on('node:click', ({ e, x, y, node, view }) => {
@@ -114,10 +86,6 @@ export default {
       }
       toggleVisibleNode(node)
     })
-
-    // 将数据渲染到页面上
-    graph.fromJSON(data);
-
   },
 };
 </script>
