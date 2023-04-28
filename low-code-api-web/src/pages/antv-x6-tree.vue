@@ -27,48 +27,63 @@ export default {
         },
       },
     });
-    // 增加节点（节点位置x、y坐标动态计算）
-    for (let i = 1; i <= 6; i++) {
-      for (let k = 1; k <= i; k++) {
-        graph.addNode({
-          id: `${i}-${k}`,
-          label: `Node ${i}-${k}`,
-          width: 80,
-          height: 40,
-          x: 100 * (k - i/2),
-          y: 100 * (i-1),
-        })
+    // mock ajax fetch data
+    const response = {
+      data: {
+        ruleTreeList: [{
+          id: 1,
+          subNo: [2,3],
+          ruleName: 'hello1',
+          level: '1-1'
+        }, {
+          id: 2,
+          subNo: [4],
+          ruleName: 'hello2',
+          level: '2-1'
+        }, {
+          id: 3,
+          subNo: [4,5,6],
+          ruleName: 'hello3',
+          level: '2-2'
+        }, {
+          id: 4,
+          subNo: [],
+          ruleName: 'hello4',
+          level: '3-1'
+        }, {
+          id: 5,
+          subNo: [],
+          ruleName: 'hello5',
+          level: '3-2'
+        }, {
+          id: 6,
+          subNo: [],
+          ruleName: 'hello6',
+          level: '3-3'
+        }]
       }
     }
-    // 增加连线
-    const edges = [
-      ['1-1', '2-1'],
-      ['1-1', '2-2'],
-      ['2-1', '3-1'],
-      ['2-1', '3-2'],
-      ['2-2', '3-3'],
-      ['3-1', '4-1'],
-      ['3-2', '4-2'],
-      ['3-3', '4-3'],
-      ['3-3', '4-4'],
-      ['4-1', '5-1'],
-      ['4-1', '5-2'],
-      ['4-2', '5-3'],
-      ['4-3', '5-4'],
-      ['4-4', '5-5'],
-      ['5-1', '6-1'],
-      ['5-2', '6-2'],
-      ['5-3', '6-3'],
-      ['5-3', '6-4'],
-      ['5-4', '6-5'],
-      ['5-5', '6-6'],
-    ];
-    edges.forEach(([source, target]) =>
-      graph.addEdge({
-        source: source,
-        target: target,
+    // 设置X6树形图的节点和边
+    response.data.ruleTreeList.forEach(item => {
+      // 增加节点（节点位置x、y坐标动态计算）
+      const [i, k] = item.level.split('-')
+      graph.addNode({
+        id: item.id,
+        label: item.ruleName,
+        width: 80,
+        height: 40,
+        x: 100 * (k - i/2),
+        y: 100 * (i-1),
       })
-    );
+      // 增加连线
+      item.subNo.forEach(sub => {
+        graph.addEdge({
+          source: item.id,
+          target: sub,
+        })
+      })
+    })
+
     graph.centerContent();
 
     // 点击某个节点，显示/隐藏其所有子元素
